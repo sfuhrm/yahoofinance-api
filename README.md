@@ -1,7 +1,7 @@
 # Finance Quotes API for Yahoo Finance (Java)
 
-[![Build Status](https://travis-ci.org/sstrickx/yahoofinance-api.svg?branch=master)](https://travis-ci.org/sstrickx/yahoofinance-api)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sfuhrm/YahooFinanceAPI/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.yahoofinance-api/YahooFinanceAPI)
+[![Build Status](https://travis-ci.org/de.sfuhrm/yahoofinance-api.svg?branch=master)](https://travis-ci.org/sfuhrm/yahoofinance-api)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sfuhrm/YahooFinanceAPI/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.sfuhrm/YahooFinanceAPI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
@@ -16,7 +16,10 @@ The changes in this fork are:
 
 * Proper closing of input/output streams, thereby working properly with HTTPS sockets.
 * Several fixes of deprecation warnings.
+* Raise minimum Java required to JDK 8.
 * Adding/changing of some badges in the project README.md.
+
+Besides these changes, the software can be used as a drop-in replacement for sstrickx' Maven artifacts.
 
 ### About the library
 
