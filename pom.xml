@@ -3,7 +3,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.yahoofinance-api</groupId>
+    <groupId>de.sfuhrm</groupId>
     <artifactId>YahooFinanceAPI</artifactId>
     <version>3.16.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -29,15 +29,19 @@
             <organization>YahooFinanceAPI</organization>
             <organizationUrl>http://financequotes-api.com</organizationUrl>
         </developer>
+        <developer>
+            <name>Stephan Fuhrmann</name>
+            <email>s@sfuhrm.de</email>
+        </developer>
     </developers>
     <issueManagement>
         <url>https://github.com/sstrickx/yahoofinance-api/issues</url>
         <system>GitHub Issues</system>
     </issueManagement>
     <scm>
-        <connection>scm:git:git://github.com/sstrickx/yahoofinance-api.git</connection>
-        <developerConnection>scm:git:git@github.com:sstrickx/yahoofinance-api.git</developerConnection>
-        <url>https://github.com/sstrickx/yahoofinance-api</url>
+        <connection>scm:git:git://github.com/sfuhrm/yahoofinance-api.git</connection>
+        <developerConnection>scm:git:git@github.com:sfuhrm/yahoofinance-api.git</developerConnection>
+        <url>https://github.com/sfuhrm/yahoofinance-api</url>
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -109,57 +113,37 @@
                 </includes>
             </resource>
         </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <!-- see bug JDK-8212233 -->
-                <configuration>
-                    <source>8</source>
-                </configuration>
-            </plugin>
-        </plugins>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ssh</artifactId>
-                <version>2.8</version>
-            </extension>
-        </extensions>
     </build>
 
     <profiles>
         <profile>
             <id>release</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
             <build>
                 <plugins>
-                    <!-- Prepare for maven central -->
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>2.2.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>1.6</version>
+                        <configuration>
+                            <keyname>0AC5A45E91FA93DA25380017B0D87B063EAD41F1</keyname>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -170,106 +154,46 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!-- Push to maven central -->
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.6</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-
-                    <!-- Prepare for Github release -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <version>2.4.1</version>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>3.0.2</version>
                         <configuration>
-                            <descriptorRefs>
-                                <descriptorRef>bin</descriptorRef>
-                            </descriptorRefs>
-                            <finalName>${project.artifactId}-${project.version}</finalName>
-                            <outputDirectory>${project.build.directory}/archive</outputDirectory>
+                            <archive>
+                                <manifest>
+                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                    <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                                </manifest>
+                                <manifestEntries>
+                                    <Build-Number>${project.version}</Build-Number>
+                                    <Build-Directory>${basedir}</Build-Directory>
+                                </manifestEntries>
+                            </archive>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
-                                <phase>package</phase>
+                                <id>attach-sources</id>
                                 <goals>
-                                    <goal>single</goal>
+                                    <goal>jar</goal>
                                 </goals>
                             </execution>
                         </executions>
                     </plugin>
-
-                    <!-- Release to Github -->
                     <plugin>
-                        <groupId>de.jutzig</groupId>
-                        <artifactId>github-release-plugin</artifactId>
-                        <version>1.1.1</version>
-                        <configuration>
-                            <description>Release version ${project.version}</description>
-                            <releaseName>${project.artifactId}-${project.version}</releaseName>
-                            <tag>v${project.version}</tag>
-                            <repositoryId>sstrickx/yahoofinance-api</repositoryId>
-                            <fileSets>
-                                <fileSet>
-                                    <directory>${project.build.directory}/archive</directory>
-                                    <includes>
-                                        <include>${project.artifactId}-${project.version}*.tar.bz2</include>
-                                        <include>${project.artifactId}-${project.version}*.tar.gz</include>
-                                        <include>${project.artifactId}-${project.version}*.zip</include>
-                                    </includes>
-                                </fileSet>
-                            </fileSets>
-                        </configuration>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.0.0</version>
                         <executions>
                             <execution>
-                                <phase>deploy</phase>
+                                <id>attach-javadocs</id>
                                 <goals>
-                                    <goal>release</goal>
+                                    <goal>jar</goal>
                                 </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!-- Update website -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>wagon-maven-plugin</artifactId>
-                        <version>1.0</version>
-                        <executions>
-                            <execution>
-                                <id>upload-javadoc</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>upload</goal>
-                                </goals>
-                                <configuration>
-                                    <serverId>financequotes-api</serverId>
-                                    <url>${yahoofinance.ssh.url}</url>
-                                    <followSymLink>true</followSymLink>
-                                    <fromDir>${project.build.directory}/apidocs</fromDir>
-                                    <includes>**</includes>
-                                    <toDir>www/yahoofinance/javadoc</toDir>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>update-version-web</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>sshexec</goal>
-                                </goals>
-                                <configuration>
-                                    <serverId>financequotes-api</serverId>
-                                    <url>${yahoofinance.ssh.url}</url>
-                                    <commands>
-                                        <command>www/yahoofinance/release/release.sh ${project.version}</command>
-                                    </commands>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -277,5 +201,6 @@
             </build>
         </profile>
     </profiles>
+
 
 </project>
