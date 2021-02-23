@@ -86,7 +86,7 @@ public class HistQuotesRequest {
 
     public List<HistoricalQuote> getResult() throws IOException {
 
-        List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
+        List<HistoricalQuote> result = new ArrayList<>();
 
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical quotes. "
@@ -95,7 +95,7 @@ public class HistQuotesRequest {
             return result;
         }
 
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        Map<String, String> params = new LinkedHashMap<>();
         params.put("s", this.symbol);
 
         params.put("a", String.valueOf(this.from.get(Calendar.MONTH)));

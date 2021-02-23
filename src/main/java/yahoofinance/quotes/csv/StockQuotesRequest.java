@@ -22,7 +22,7 @@ public class StockQuotesRequest extends QuotesRequest<StockQuotesData> {
      * using the easy String.split
      *
      */
-    public static final List<QuotesProperty> DEFAULT_PROPERTIES = new ArrayList<QuotesProperty>();
+    public static final List<QuotesProperty> DEFAULT_PROPERTIES = new ArrayList<>();
 
     static {
 
@@ -95,25 +95,25 @@ public class StockQuotesRequest extends QuotesRequest<StockQuotesData> {
         DEFAULT_PROPERTIES.add(QuotesProperty.Revenue);
         DEFAULT_PROPERTIES.add(QuotesProperty.EBITDA);
         DEFAULT_PROPERTIES.add(QuotesProperty.OneyrTargetPrice);
-        
+
         DEFAULT_PROPERTIES.add(QuotesProperty.ShortRatio);
     }
-    
+
     public StockQuotesRequest(String query) {
         super(query, StockQuotesRequest.DEFAULT_PROPERTIES);
     }
 
     @Override
     protected StockQuotesData parseCSVLine(String line) {
-        List<String> parsedLine = new ArrayList<String>();
-        
+        List<String> parsedLine = new ArrayList<>();
+
         // first get company name, symbol, currency and exchange
         // because we need the symbol and currency or exchange might be the same as the symbol!
         // pretty ugly code due to the bad format of the csv
         int pos1 = 0;
-        int pos2 = 0;
+        int pos2;
         int skip = 2;
-        
+
         if(line.startsWith("\"")) {
             pos1 = 1; // skip first \"
             pos2 = line.indexOf('\"', 1);
@@ -121,7 +121,7 @@ public class StockQuotesRequest extends QuotesRequest<StockQuotesData> {
             pos2 = line.indexOf(",\""); // last comma before the first symbol (hopefully)
             skip = 1;
         }
-        
+
         String name = line.substring(pos1, pos2);
         pos1 = pos2 + skip; // skip \",
         pos2 = line.indexOf('\"', pos1 + 1);
@@ -139,7 +139,7 @@ public class StockQuotesRequest extends QuotesRequest<StockQuotesData> {
             skip = 1;
         }
         String currency = line.substring(pos1, pos2);
-        
+
         pos1 = pos2 + skip;
         if (line.charAt(pos1) == '\"') {
             pos1 += 1;
@@ -150,7 +150,7 @@ public class StockQuotesRequest extends QuotesRequest<StockQuotesData> {
             skip = 1;
         }
         String exchange = line.substring(pos1, pos2);
-        
+
         parsedLine.add(name);
         parsedLine.add(symbol);
         parsedLine.add(currency);

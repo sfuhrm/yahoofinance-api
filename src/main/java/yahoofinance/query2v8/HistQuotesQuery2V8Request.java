@@ -104,7 +104,7 @@ public class HistQuotesQuery2V8Request {
         JsonNode lows = quotes.get("low");
         JsonNode adjCloses = indicators.get("adjclose").get(0).get("adjclose");
 
-        List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
+        List<HistoricalQuote> result = new ArrayList<>();
         for (int i = 0; i < timestamps.size(); i++) {
             long timestamp = timestamps.get(i).asLong();
             Calendar calendar = Calendar.getInstance();
@@ -140,7 +140,7 @@ public class HistQuotesQuery2V8Request {
             return "";
         }
 
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        Map<String, String> params = new LinkedHashMap<>();
         params.put("period1", String.valueOf(this.from.getTimeInMillis() / 1000));
         params.put("period2", String.valueOf(this.to.getTimeInMillis() / 1000));
         params.put("interval", this.interval.getTag());
@@ -159,7 +159,7 @@ public class HistQuotesQuery2V8Request {
 
         StringBuilder builder = new StringBuilder();
         try (   InputStreamReader is = new InputStreamReader(connection.getInputStream());
-                BufferedReader br = new BufferedReader(is); ) {
+                BufferedReader br = new BufferedReader(is)) {
             for (String line = br.readLine(); line != null; line = br.readLine()) {
                 if (builder.length() > 0) {
                     builder.append("\n");

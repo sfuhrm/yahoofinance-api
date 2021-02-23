@@ -12,13 +12,13 @@ import yahoofinance.quotes.fx.FxQuote;
  * @author Stijn Strickx
  */
 public class FxQuotesRequest extends QuotesRequest<FxQuote> {
-    
-    public static final List<QuotesProperty> DEFAULT_PROPERTIES = new ArrayList<QuotesProperty>();
+
+    public static final List<QuotesProperty> DEFAULT_PROPERTIES = new ArrayList<>();
     static {
         DEFAULT_PROPERTIES.add(QuotesProperty.Symbol);
         DEFAULT_PROPERTIES.add(QuotesProperty.LastTradePriceOnly);
     }
-    
+
     public FxQuotesRequest(String query) {
         super(query, FxQuotesRequest.DEFAULT_PROPERTIES);
     }
@@ -31,5 +31,5 @@ public class FxQuotesRequest extends QuotesRequest<FxQuote> {
         }
         return null;
     }
-    
+
 }

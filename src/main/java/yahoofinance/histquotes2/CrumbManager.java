@@ -63,11 +63,11 @@ public class CrumbManager {
             }
         }
 
-        Map<String, String> datas = new HashMap<String, String>();
+        Map<String, String> datas = new HashMap<>();
         //  If cookie is not set, we should consent to activate cookie
         try (
             InputStreamReader is = new InputStreamReader(connection.getInputStream());
-            BufferedReader br = new BufferedReader(is);) {
+            BufferedReader br = new BufferedReader(is)) {
             String line;
             Pattern patternPostForm = Pattern.compile("(.*)(action=\"/consent\")(.*)");
             Pattern patternInput = Pattern.compile("(.*)(<input type=\"hidden\" name=\")(.*?)(\" value=\")(.*?)(\">)");
@@ -100,7 +100,7 @@ public class CrumbManager {
         	 datas.put("doneUrl",YahooFinance.HISTQUOTES2_COOKIE_OATH_DONEURL+datas.get("sessionId")+"&inline="+datas.get("inline")+"&lang="+datas.get("locale"));
 
         	 URL requestOath = new URL(YahooFinance.HISTQUOTES2_COOKIE_OATH_URL);
-        	 HttpURLConnection connectionOath = null;
+        	 HttpURLConnection connectionOath;
         	 connectionOath = (HttpURLConnection) requestOath.openConnection();
         	 connectionOath.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
         	 connectionOath.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
@@ -110,7 +110,7 @@ public class CrumbManager {
         	 connectionOath.setRequestProperty("Host",YahooFinance.HISTQUOTES2_COOKIE_OATH_HOST);
         	 connectionOath.setRequestProperty("Origin",YahooFinance.HISTQUOTES2_COOKIE_OATH_ORIGIN);
         	 connectionOath.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-        	 StringBuilder params=new StringBuilder("");
+        	 StringBuilder params=new StringBuilder();
 
     		 for ( String key : datas.keySet() ) {
     			 if(params.length() == 0 ){
@@ -129,7 +129,7 @@ public class CrumbManager {
 
         	 log.debug("Params = "+ params.toString());
         	 connectionOath.setRequestProperty("Content-Length",Integer.toString(params.toString().length()));
-        	 try (OutputStreamWriter outputStreamWriter = new OutputStreamWriter(connectionOath.getOutputStream());) {
+        	 try (OutputStreamWriter outputStreamWriter = new OutputStreamWriter(connectionOath.getOutputStream())) {
                  outputStreamWriter.write(params.toString());
                  outputStreamWriter.flush();
                  connectionOath.setInstanceFollowRedirects(true);
@@ -163,12 +163,12 @@ public class CrumbManager {
         redirectableCrumbRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
         redirectableCrumbRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
 
-        Map<String, String> requestProperties = new HashMap<String, String>();
+        Map<String, String> requestProperties = new HashMap<>();
         requestProperties.put("Cookie", cookie);
 
         URLConnection crumbConnection = redirectableCrumbRequest.openConnection(requestProperties);
         try (   InputStreamReader is = new InputStreamReader(crumbConnection.getInputStream());
-                BufferedReader br = new BufferedReader(is); ) {
+                BufferedReader br = new BufferedReader(is)) {
             String crumbResult = br.readLine();
 
             if (crumbResult != null && !crumbResult.isEmpty()) {

@@ -6,7 +6,6 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import yahoofinance.YahooFinance;
 
 import java.io.IOException;
 

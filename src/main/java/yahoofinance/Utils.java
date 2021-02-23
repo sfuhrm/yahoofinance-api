@@ -309,7 +309,7 @@ public class Utils {
         StringBuilder buffer = new StringBuilder(data.length());
         for (int i = 0; i < data.length(); i++) {
             if ((int) data.charAt(i) > 256) {
-                buffer.append("\\u").append(Integer.toHexString((int) data.charAt(i)));
+                buffer.append("\\u").append(Integer.toHexString(data.charAt(i)));
             } else {
                 if (data.charAt(i) == '\n') {
                     buffer.append("\\n");

@@ -18,8 +18,8 @@ public class ResponseResource {
 
     private static final Logger log = LoggerFactory.getLogger(ResponseResource.class);
 
-    private int responseCode;
-    private String resource;
+    private final int responseCode;
+    private final String resource;
 
     public ResponseResource(String resource) {
         this(resource, 200);

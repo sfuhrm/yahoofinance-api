@@ -72,9 +72,9 @@ public abstract class QuotesRequest<T> {
      * @throws java.io.IOException when there's a connection problem or the request is incorrect
      */
     public List<T> getResult() throws IOException {
-        List<T> result = new ArrayList<T>();
+        List<T> result = new ArrayList<>();
 
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        Map<String, String> params = new LinkedHashMap<>();
         params.put("s", this.query);
         params.put("f", this.getFieldsString());
         params.put("e", ".csv");
@@ -91,7 +91,7 @@ public abstract class QuotesRequest<T> {
         URLConnection connection = redirectableRequest.openConnection();
 
         try (   InputStreamReader is = new InputStreamReader(connection.getInputStream());
-                BufferedReader br = new BufferedReader(is); ) {
+                BufferedReader br = new BufferedReader(is)) {
 
             // Parse CSV
             for (String line = br.readLine(); line != null; line = br.readLine()) {

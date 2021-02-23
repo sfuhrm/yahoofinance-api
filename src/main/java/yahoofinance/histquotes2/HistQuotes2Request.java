@@ -99,7 +99,7 @@ public class HistQuotes2Request {
 
     public List<HistoricalQuote> getResult() throws IOException {
 
-        List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
+        List<HistoricalQuote> result = new ArrayList<>();
 
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical quotes. "
@@ -108,7 +108,7 @@ public class HistQuotes2Request {
             return result;
         }
 
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        Map<String, String> params = new LinkedHashMap<>();
         params.put("period1", String.valueOf(this.from.getTimeInMillis() / 1000));
         params.put("period2", String.valueOf(this.to.getTimeInMillis() / 1000));
 
@@ -125,12 +125,12 @@ public class HistQuotes2Request {
         RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
         redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        Map<String, String> requestProperties = new HashMap<String, String>();
+        Map<String, String> requestProperties = new HashMap<>();
         requestProperties.put("Cookie", CrumbManager.getCookie());
         URLConnection connection = redirectableRequest.openConnection(requestProperties);
 
         try (   InputStreamReader is = new InputStreamReader(connection.getInputStream());
-                BufferedReader br = new BufferedReader(is); ) {
+                BufferedReader br = new BufferedReader(is)) {
             br.readLine(); // skip the first line
             // Parse CSV
             for (String line = br.readLine(); line != null; line = br.readLine()) {

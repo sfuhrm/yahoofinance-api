@@ -23,15 +23,15 @@ public class YahooFinanceDispatcher extends Dispatcher {
 
     private static final Logger log = LoggerFactory.getLogger(YahooFinanceDispatcher.class);
 
-    private Map<String, ResponseResource> pathToResponseResource;
+    private final Map<String, ResponseResource> pathToResponseResource;
 
     public YahooFinanceDispatcher() {
-        this.pathToResponseResource = new HashMap<String, ResponseResource>();
+        this.pathToResponseResource = new HashMap<>();
         this.loadRequests();
     }
 
     @Override
-    public MockResponse dispatch(RecordedRequest request) throws InterruptedException {
+    public MockResponse dispatch(RecordedRequest request) {
         if(this.pathToResponseResource.containsKey(request.getPath())) {
             return this.pathToResponseResource.get(request.getPath()).get();
         } else {
@@ -45,7 +45,7 @@ public class YahooFinanceDispatcher extends Dispatcher {
         Map<String, List<Map<String, Object>>> requests;
         try {
             String requestsYaml = Resources.toString(Resources.getResource("requests.yml"), Charsets.UTF_8);
-            requests = (Map<String, List<Map<String, Object>>>) yaml.load(requestsYaml);
+            requests = yaml.load(requestsYaml);
         } catch (IOException e) {
             log.warn("Unable to process requests.yml. No requests mocked.", e);
             return;

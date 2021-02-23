@@ -55,9 +55,9 @@ public abstract class QuotesRequest<T> {
      * @throws IOException when there's a connection problem or the request is incorrect
      */
     public List<T> getResult() throws IOException {
-        List<T> result = new ArrayList<T>();
+        List<T> result = new ArrayList<>();
 
-        Map<String, String> params = new LinkedHashMap<String, String>();
+        Map<String, String> params = new LinkedHashMap<>();
         params.put("symbols", this.symbols);
 
         String url = YahooFinance.QUOTES_QUERY1V7_BASE_URL + "?" + Utils.getURLParameters(params);
