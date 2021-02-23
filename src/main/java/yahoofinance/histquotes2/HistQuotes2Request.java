@@ -100,7 +100,7 @@ public class HistQuotes2Request {
     public List<HistoricalQuote> getResult() throws IOException {
 
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
-        
+
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
@@ -129,15 +129,16 @@ public class HistQuotes2Request {
         requestProperties.put("Cookie", CrumbManager.getCookie());
         URLConnection connection = redirectableRequest.openConnection(requestProperties);
 
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
-        br.readLine(); // skip the first line
-        // Parse CSV
-        for (String line = br.readLine(); line != null; line = br.readLine()) {
+        try (   InputStreamReader is = new InputStreamReader(connection.getInputStream());
+                BufferedReader br = new BufferedReader(is); ) {
+            br.readLine(); // skip the first line
+            // Parse CSV
+            for (String line = br.readLine(); line != null; line = br.readLine()) {
 
-            log.info("Parsing CSV line: " + Utils.unescape(line));
-            HistoricalQuote quote = this.parseCSVLine(line);
-            result.add(quote);
+                log.info("Parsing CSV line: " + Utils.unescape(line));
+                HistoricalQuote quote = this.parseCSVLine(line);
+                result.add(quote);
+            }
         }
         return result;
     }

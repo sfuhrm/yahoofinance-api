@@ -71,7 +71,7 @@ public class HistQuotesRequest {
         this.cleanHistCalendar(this.from);
         this.cleanHistCalendar(this.to);
     }
-    
+
     /**
      * Put everything smaller than days at 0
      * @param cal calendar to be cleaned
@@ -87,14 +87,14 @@ public class HistQuotesRequest {
     public List<HistoricalQuote> getResult() throws IOException {
 
         List<HistoricalQuote> result = new ArrayList<HistoricalQuote>();
-        
+
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical quotes. "
                     + "From-date should not be after to-date. From: "
                     + this.from.getTime() + ", to: " + this.to.getTime());
             return result;
         }
-        
+
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("s", this.symbol);
 
@@ -121,15 +121,16 @@ public class HistQuotesRequest {
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         URLConnection connection = redirectableRequest.openConnection();
 
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
-        br.readLine(); // skip the first line
-        // Parse CSV
-        for (String line = br.readLine(); line != null; line = br.readLine()) {
+        try (InputStreamReader is = new InputStreamReader(connection.getInputStream());
+             BufferedReader br = new BufferedReader(is)) {
+            br.readLine(); // skip the first line
+            // Parse CSV
+            for (String line = br.readLine(); line != null; line = br.readLine()) {
 
-            log.info("Parsing CSV line: " + Utils.unescape(line));
-            HistoricalQuote quote = this.parseCSVLine(line);
-            result.add(quote);
+                log.info("Parsing CSV line: " + Utils.unescape(line));
+                HistoricalQuote quote = this.parseCSVLine(line);
+                result.add(quote);
+            }
         }
         return result;
     }

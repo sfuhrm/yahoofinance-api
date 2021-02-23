@@ -157,14 +157,15 @@ public class HistQuotesQuery2V8Request {
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         URLConnection connection = redirectableRequest.openConnection();
 
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
         StringBuilder builder = new StringBuilder();
-        for (String line = br.readLine(); line != null; line = br.readLine()) {
-            if (builder.length() > 0) {
-                builder.append("\n");
+        try (   InputStreamReader is = new InputStreamReader(connection.getInputStream());
+                BufferedReader br = new BufferedReader(is); ) {
+            for (String line = br.readLine(); line != null; line = br.readLine()) {
+                if (builder.length() > 0) {
+                    builder.append("\n");
+                }
+                builder.append(line);
             }
-            builder.append(line);
         }
         return builder.toString();
     }

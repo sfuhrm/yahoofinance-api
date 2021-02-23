@@ -71,15 +71,16 @@ public abstract class QuotesRequest<T> {
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         URLConnection connection = redirectableRequest.openConnection();
 
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        JsonNode node = objectMapper.readTree(is);
-        if(node.has("quoteResponse") && node.get("quoteResponse").has("result")) {
-            node = node.get("quoteResponse").get("result");
-            for(int i = 0; i < node.size(); i++) {
-                result.add(this.parseJson(node.get(i)));
+        try (InputStreamReader is = new InputStreamReader(connection.getInputStream())) {
+            JsonNode node = objectMapper.readTree(is);
+            if (node.has("quoteResponse") && node.get("quoteResponse").has("result")) {
+                node = node.get("quoteResponse").get("result");
+                for (int i = 0; i < node.size(); i++) {
+                    result.add(this.parseJson(node.get(i)));
+                }
+            } else {
+                throw new IOException("Invalid response");
             }
-        } else {
-            throw new IOException("Invalid response");
         }
 
         return result;

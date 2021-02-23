@@ -72,7 +72,7 @@ public class HistSplitsRequest {
     public List<HistoricalSplit> getResult() throws IOException {
 
         List<HistoricalSplit> result = new ArrayList<HistoricalSplit>();
-        
+
         if(this.from.after(this.to)) {
             log.warn("Unable to retrieve historical splits. "
                     + "From-date should not be after to-date. From: "
@@ -87,7 +87,7 @@ public class HistSplitsRequest {
         // Interval has no meaning here and is not used here
         // But it's better to leave it because Yahoo's standard query URL still contains it
         params.put("interval", DEFAULT_INTERVAL.getTag());
-        
+
         // This will instruct Yahoo to return splits
         params.put("events", "split");
 
@@ -106,15 +106,16 @@ public class HistSplitsRequest {
         requestProperties.put("Cookie", CrumbManager.getCookie());
         URLConnection connection = redirectableRequest.openConnection(requestProperties);
 
-        InputStreamReader is = new InputStreamReader(connection.getInputStream());
-        BufferedReader br = new BufferedReader(is);
-        br.readLine(); // skip the first line
-        // Parse CSV
-        for (String line = br.readLine(); line != null; line = br.readLine()) {
+        try (   InputStreamReader is = new InputStreamReader(connection.getInputStream());
+                BufferedReader br = new BufferedReader(is); ) {
+            br.readLine(); // skip the first line
+            // Parse CSV
+            for (String line = br.readLine(); line != null; line = br.readLine()) {
 
-            log.info("Parsing CSV line: " + Utils.unescape(line));
-            HistoricalSplit split = this.parseCSVLine(line);
-            result.add(split);
+                log.info("Parsing CSV line: " + Utils.unescape(line));
+                HistoricalSplit split = this.parseCSVLine(line);
+                result.add(split);
+            }
         }
         return result;
     }
