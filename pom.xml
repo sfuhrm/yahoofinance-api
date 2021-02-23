@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.sfuhrm</groupId>
     <artifactId>YahooFinanceAPI</artifactId>
@@ -12,7 +13,8 @@
         and historical quotes on stocks.
         Separate functionality is available to request a simple FX quote.
         Please check the javadoc to get a complete overview of the available methods
-        and to get an idea of which data is available from Yahoo Finance.</description>
+        and to get an idea of which data is available from Yahoo Finance.
+    </description>
     <url>http://financequotes-api.com</url>
     <licenses>
         <license>
@@ -40,8 +42,8 @@
         <connection>scm:git:git://github.com/sfuhrm/yahoofinance-api.git</connection>
         <developerConnection>scm:git:git@github.com:sfuhrm/yahoofinance-api.git</developerConnection>
         <url>https://github.com/sfuhrm/yahoofinance-api</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
@@ -211,6 +213,4 @@
             </build>
         </profile>
     </profiles>
-
-
 </project>
