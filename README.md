@@ -19,6 +19,7 @@ The changes in this fork are:
 * Several fixes of deprecation warnings.
 * Raise minimum Java required to JDK 8.
 * Adding/changing of some badges in the project README.md.
+* Add Github actions for continuous integration.
 
 Besides these changes, the software can be used as a drop-in replacement for sstrickx' Maven artifacts.
 
