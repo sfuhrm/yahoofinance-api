@@ -1,6 +1,7 @@
 # Finance Quotes API for Yahoo Finance (Java)
 
 [![Java CI with Maven](https://github.com/sfuhrm/yahoofinance-api/actions/workflows/maven.yml/badge.svg)](https://github.com/sfuhrm/yahoofinance-api/actions/workflows/maven.yml)
+[![Coverage](https://raw.githubusercontent.com/sfuhrm/yahoofinance-api/master/.github/badges/jacoco.svg)](https://github.com/sfuhrm/yahoofinance-api/actions)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sfuhrm/YahooFinanceAPI/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.sfuhrm/YahooFinanceAPI)
 [![javadoc](https://javadoc.io/badge2/de.sfuhrm/YahooFinanceAPI/javadoc.svg)](https://javadoc.io/doc/de.sfuhrm/YahooFinanceAPI)
 [![ReleaseDate](https://img.shields.io/github/release-date/sfuhrm/yahoofinance-api)](https://github.com/sfuhrm/yahoofinance-api/releases)
