@@ -6,6 +6,18 @@
 [![ReleaseDate](https://img.shields.io/github/release-date/sfuhrm/yahoofinance-api)](https://github.com/sfuhrm/yahoofinance-api/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+### Open Developer Jobs (ad)
+
+Take a look at some of open job offers from one of Germanys top internet hoster (2022-01-21), remote work is possible:
+
+- [Software Developer CI/CD](https://united-internet.talentry.com/share/job/192434/600581/1642766341/3)
+- [Java Backend Developers](https://united-internet.talentry.com/share/job/200597/600581/1642513126/3)
+- [PHP / GO Developers](https://united-internet.talentry.com/share/job/220120/600581/1642513009/3)
+- [Java Developers](https://united-internet.talentry.com/share/job/225983/600581/1642513102/3)
+- [more jobs](https://united-internet.talentry.com/list/m46c026eamchgwc1islqbv)
+
+German job openings don't mean that we're not talking english :).
+
 ### About this fork
 
 This is a fork of sstrickx' yahoofinanceapi which can be found [here](https://github.com/sstrickx/yahoofinance-api).
