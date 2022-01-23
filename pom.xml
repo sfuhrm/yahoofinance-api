@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.sfuhrm</groupId>
     <artifactId>YahooFinanceAPI</artifactId>
-    <version>3.16.3</version>
+    <version>3.16.4-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>YahooFinanceAPI</name>
     <description>This library provides some methods that should make it easy
@@ -41,7 +41,7 @@
         <connection>scm:git:git://github.com/sfuhrm/yahoofinance-api.git</connection>
         <developerConnection>scm:git:git@github.com:sfuhrm/yahoofinance-api.git</developerConnection>
         <url>https://github.com/sfuhrm/yahoofinance-api</url>
-        <tag>YahooFinanceAPI-3.16.3</tag>
+        <tag>HEAD</tag>
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
