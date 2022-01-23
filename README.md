@@ -8,7 +8,7 @@
 
 ### Open Developer Jobs (ad)
 
-Take a look at some of open job offers from one of Germanys top internet hoster (2022-01-21), remote work is possible:
+A selection of open job offers from one of Germanys top internet hoster (2022-01-21), remote work is possible:
 
 - [Software Developer CI/CD](https://united-internet.talentry.com/share/job/192434/600581/1642766341/3)
 - [Java Backend Developers](https://united-internet.talentry.com/share/job/200597/600581/1642513126/3)
