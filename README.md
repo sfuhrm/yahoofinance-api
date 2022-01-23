@@ -11,11 +11,11 @@
 
 A selection of open job offers from Germanys biggest internet hoster IONOS (2022-01-21). Remote work is possible:
 
-- [Software Developer CI/CD](https://united-internet.talentry.com/share/job/192434/600581/1642766341/3)
-- [Java Backend Developers](https://united-internet.talentry.com/share/job/200597/600581/1642513126/3)
-- [PHP / GO Developers](https://united-internet.talentry.com/share/job/220120/600581/1642513009/3)
-- [Java Developers](https://united-internet.talentry.com/share/job/225983/600581/1642513102/3)
-- [more jobs](https://united-internet.talentry.com/list/m46c026eamchgwc1islqbv)
+- [Software Developer CI/CD](https://bit.ly/3rLJKFA)
+- [Java Backend Developers](https://bit.ly/33JC8vt)
+- [PHP / GO Developers](https://bit.ly/3nPV8zm)
+- [Java Developers](https://bit.ly/3fQdOdP)
+- [more jobs](https://bit.ly/3tSh9kI)
 
 German job openings don't mean that we're not talking english :).
 
