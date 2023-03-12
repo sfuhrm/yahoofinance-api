@@ -1,22 +1,12 @@
 # Finance Quotes API for Yahoo Finance (Java)
 
 [![Java CI with Maven](https://github.com/sfuhrm/yahoofinance-api/actions/workflows/maven.yml/badge.svg)](https://github.com/sfuhrm/yahoofinance-api/actions/workflows/maven.yml)
+[![Coverage](https://raw.githubusercontent.com/sfuhrm/yahoofinance-api/master/.github/badges/jacoco.svg)](https://github.com/sfuhrm/yahoofinance-api/actions)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sfuhrm/YahooFinanceAPI/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.sfuhrm/YahooFinanceAPI)
 [![javadoc](https://javadoc.io/badge2/de.sfuhrm/YahooFinanceAPI/javadoc.svg)](https://javadoc.io/doc/de.sfuhrm/YahooFinanceAPI)
 [![ReleaseDate](https://img.shields.io/github/release-date/sfuhrm/yahoofinance-api)](https://github.com/sfuhrm/yahoofinance-api/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### Open Developer Jobs (ad)
-
-A selection of open job offers from one of Germanys top internet hoster (2022-01-21), remote work is possible:
-
-- [Software Developer CI/CD](https://united-internet.talentry.com/share/job/192434/600581/1642766341/3)
-- [Java Backend Developers](https://united-internet.talentry.com/share/job/200597/600581/1642513126/3)
-- [PHP / GO Developers](https://united-internet.talentry.com/share/job/220120/600581/1642513009/3)
-- [Java Developers](https://united-internet.talentry.com/share/job/225983/600581/1642513102/3)
-- [more jobs](https://united-internet.talentry.com/list/m46c026eamchgwc1islqbv)
-
-German job openings don't mean that we're not talking english :).
 
 ### About this fork
 
