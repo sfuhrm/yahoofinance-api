@@ -7,17 +7,6 @@
 [![ReleaseDate](https://img.shields.io/github/release-date/sfuhrm/yahoofinance-api)](https://github.com/sfuhrm/yahoofinance-api/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### Open Developer Jobs (ad)
-
-A selection of open job offers from Germanys biggest internet hoster IONOS (2022-01-21). Remote work is possible:
-
-- [Software Developer CI/CD](https://bit.ly/3rLJKFA)
-- [Java Backend Developers](https://bit.ly/33JC8vt)
-- [PHP / GO Developers](https://bit.ly/3nPV8zm)
-- [Java Developers](https://bit.ly/3fQdOdP)
-- [more jobs](https://bit.ly/3tSh9kI)
-
-German job openings don't mean that we're not talking english :).
 
 ### About this fork
 
