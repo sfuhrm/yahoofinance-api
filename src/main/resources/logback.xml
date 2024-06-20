@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Filter out unwanted logging from logback itself -->
+    <logger name="ch.qos.logback" level="WARN" />
+    <logger name="org.slf4j" level="WARN" />
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- Pattern Layout for console logging -->
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %C{0} - %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <!-- Root Logger Configuration -->
+    <root level="WARN">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <!-- Logger Configuration for Specific Package -->
+    <logger name="yahoofinance" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+</configuration>
