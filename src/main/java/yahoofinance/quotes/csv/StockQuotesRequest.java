@@ -13,10 +13,10 @@ public class StockQuotesRequest extends QuotesRequest<StockQuotesData> {
      * Yahoo Finance is responding with formatted numbers in some cases. Because
      * of this, those number may contain commas. This will screw up the CSV
      * file.
-     *
+     * <p>
      * It's not possible to choose a different delimiter for the CSV or to
      * disable the number formatting
-     *
+     * <p>
      * To work around this, we surround the vulnerable values by the stock
      * symbol. This forces us to do manual parsing of the CSV lines instead of
      * using the easy String.split

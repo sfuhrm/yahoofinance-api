@@ -37,9 +37,9 @@ import yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request;
  * This API can also be used to send requests for retrieving FX rates.
  * <p>
  * Since the data is provided by Yahoo, please check their Terms of Service
- * at https://info.yahoo.com/legal/us/yahoo/
+ * at <a href="https://info.yahoo.com/legal/us/yahoo/">...</a>
  *
- * @author      Stijn Strickx
+ * @author Stijn Strickx
  * @version     %I%, %G%
  */
 public class YahooFinance {
