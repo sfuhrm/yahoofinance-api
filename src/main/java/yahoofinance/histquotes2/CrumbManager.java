@@ -55,12 +55,10 @@ public class CrumbManager {
         Map<String, List<String>> headerFields = connection.getHeaderFields();
         List<String> cookiesHeader = headerFields.get("Set-Cookie");
         if (cookiesHeader != null) {
-            for (String cookie : cookiesHeader) {
-                log.debug("Set-Cookie: {}", cookie);
-            }
+            setCookieFromHeaderValues(cookiesHeader);
             return;
         } else {
-            log.warn("No Set-Cookie header found in the response.");
+            log.warn("No Set-Cookie header found in the response");
         }
 
         Map<String, String> datas = new HashMap<>();
@@ -92,7 +90,7 @@ public class CrumbManager {
             }
         }
         // If params are not empty, send the post request
-        if(datas.size()>0){
+        if(!datas.isEmpty()){
 
         	 datas.put("namespace",YahooFinance.HISTQUOTES2_COOKIE_NAMESPACE);
         	 datas.put("agree",YahooFinance.HISTQUOTES2_COOKIE_AGREE);
@@ -148,7 +146,19 @@ public class CrumbManager {
              }
         }
 
-        log.warn("Failed to set cookie from http request. Historical quote requests will most likely fail.");
+        log.warn("Failed to set cookie from http request. Historical quote requests will most likely fail");
+    }
+    
+    private static void setCookieFromHeaderValues(List<String> cookiesHeader){
+        StringBuilder cookieBuilder = new StringBuilder(CrumbManager.cookie);
+        for (String cookie : cookiesHeader) {
+            log.debug("Set-Cookie: {}", cookie);
+            if (cookieBuilder.length() > 0) {
+                cookieBuilder.append("; ");
+            }
+            cookieBuilder.append(cookie);
+        }
+        CrumbManager.cookie = cookieBuilder.toString();
     }
 
     private static void setCrumb() throws IOException {
