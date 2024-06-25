@@ -175,7 +175,7 @@ public class Stock {
 
     /**
      * Returns the dividend data available for this stock.
-     *
+     * <p>
      * This method will return null in the following situations:
      * <ul>
      * <li> the data hasn't been loaded yet

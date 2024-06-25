@@ -30,6 +30,7 @@ import yahoofinance.util.RedirectableRequest;
 public class CrumbManager {
 
     private static final Logger log = LoggerFactory.getLogger(CrumbManager.class);
+    private static final String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5.2 Safari/605.1.15";
 
     private static String crumb = "";
     private static String cookie = "";
@@ -41,26 +42,23 @@ public class CrumbManager {
             return;
         }
 
-        URL request = new URL(YahooFinance.HISTQUOTES2_SCRAPE_URL);
+        URL request = new URL(YahooFinance.GET_COOKIE_URL);
         RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
         redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
 
+        Map<String, String> requestProperties = new HashMap<>();
+        requestProperties.put("Host", "fc.yahoo.com");
+        requestProperties.put("User-Agent", USER_AGENT);
+        URLConnection connection = redirectableRequest.openConnection(requestProperties);
 
-        URLConnection connection = redirectableRequest.openConnection();
-
-        for(String headerKey : connection.getHeaderFields().keySet()) {
-            if("Set-Cookie".equalsIgnoreCase(headerKey)) {
-                for(String cookieField : connection.getHeaderFields().get(headerKey)) {
-                    for(String cookieValue : cookieField.split(";")) {
-                        if(cookieValue.matches("B=.*")) {
-                            cookie = cookieValue;
-                            log.debug("Set cookie from http request: {}", cookie);
-                            return;
-                        }
-                    }
-                }
-            }
+        Map<String, List<String>> headerFields = connection.getHeaderFields();
+        List<String> cookiesHeader = headerFields.get("Set-Cookie");
+        if (cookiesHeader != null) {
+            setCookieFromHeaderValues(cookiesHeader);
+            return;
+        } else {
+            log.warn("No Set-Cookie header found in the response");
         }
 
         Map<String, String> datas = new HashMap<>();
@@ -92,7 +90,7 @@ public class CrumbManager {
             }
         }
         // If params are not empty, send the post request
-        if(datas.size()>0){
+        if(!datas.isEmpty()){
 
         	 datas.put("namespace",YahooFinance.HISTQUOTES2_COOKIE_NAMESPACE);
         	 datas.put("agree",YahooFinance.HISTQUOTES2_COOKIE_AGREE);
@@ -148,7 +146,19 @@ public class CrumbManager {
              }
         }
 
-        log.warn("Failed to set cookie from http request. Historical quote requests will most likely fail.");
+        log.warn("Failed to set cookie from http request. Historical quote requests will most likely fail");
+    }
+    
+    private static void setCookieFromHeaderValues(List<String> cookiesHeader){
+        StringBuilder cookieBuilder = new StringBuilder(CrumbManager.cookie);
+        for (String cookie : cookiesHeader) {
+            log.debug("Set-Cookie: {}", cookie);
+            if (cookieBuilder.length() > 0) {
+                cookieBuilder.append("; ");
+            }
+            cookieBuilder.append(cookie);
+        }
+        CrumbManager.cookie = cookieBuilder.toString();
     }
 
     private static void setCrumb() throws IOException {
@@ -165,6 +175,7 @@ public class CrumbManager {
 
         Map<String, String> requestProperties = new HashMap<>();
         requestProperties.put("Cookie", cookie);
+        requestProperties.put("User-Agent", USER_AGENT);
 
         URLConnection crumbConnection = redirectableCrumbRequest.openConnection(requestProperties);
         try (   InputStreamReader is = new InputStreamReader(crumbConnection.getInputStream());

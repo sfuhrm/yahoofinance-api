@@ -125,9 +125,7 @@ public class HistQuotes2Request {
         RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
         redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        Map<String, String> requestProperties = new HashMap<>();
-        requestProperties.put("Cookie", CrumbManager.getCookie());
-        URLConnection connection = redirectableRequest.openConnection(requestProperties);
+        URLConnection connection = redirectableRequest.openConnection();
 
         try (   InputStreamReader is = new InputStreamReader(connection.getInputStream());
                 BufferedReader br = new BufferedReader(is)) {

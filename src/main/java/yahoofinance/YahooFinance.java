@@ -37,13 +37,14 @@ import yahoofinance.quotes.query1v7.StockQuotesQuery1V7Request;
  * This API can also be used to send requests for retrieving FX rates.
  * <p>
  * Since the data is provided by Yahoo, please check their Terms of Service
- * at https://info.yahoo.com/legal/us/yahoo/
+ * at <a href="https://info.yahoo.com/legal/us/yahoo/">...</a>
  *
- * @author      Stijn Strickx
+ * @author Stijn Strickx
  * @version     %I%, %G%
  */
 public class YahooFinance {
 
+    public static final String GET_COOKIE_URL = System.getProperty("yahoofinance.cookie.url", "https://fc.yahoo.com/");
     public static final String QUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.quotes", "http://download.finance.yahoo.com/d/quotes.csv");
     public static final String QUOTES_QUERY1V7_BASE_URL = System.getProperty("yahoofinance.baseurl.quotesquery1v7", "https://query1.finance.yahoo.com/v7/finance/quote");
     public static final String QUOTES_QUERY1V7_ENABLED = System.getProperty("yahoofinance.quotesquery1v7.enabled", "true");
